@@ -14,7 +14,7 @@ public class HomePage {
 
     WebDriver driver;
 
-    @FindBy(how = How.CSS, using = ".footer-block.grid__item")
+    @FindBy(how = How.XPATH, using = "//h2[text()='Our mission']/parent::div//p")
     private WebElement ourMissionText;
 
     @FindBy(how = How.CSS, using = ".icon-search")
