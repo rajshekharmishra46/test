@@ -5,7 +5,7 @@
     <classes>
       <class name="CartTests">
         <methods>
-          <include name="shouldClearCart"/>
+          <include name="shouldAddItemCart"/>
         </methods>
       </class> <!-- CartTests -->
     </classes>

@@ -25,22 +25,22 @@ public class CartTests {
     }
 
 
-//    @Test(description = "LEVEL-2")
-//    public void shouldAddItemCart() {
-//        WebDriverManager.chromedriver().setup();
-//        WebDriver driver = new ChromeDriver();
-//
-//        driver.get("https://testvagrant.myshopify.com/");
-//
-//        HomePage homePage = new HomePage(driver);
-//        homePage.addProductsToCart(2);
-//
-//        int cartCount = new CartPage(driver).getCartCount();
-//        Assert.assertEquals(cartCount, 2);
-//
-//        driver.quit();
-//
-//    }
+    @Test(description = "LEVEL-2")
+    public void shouldAddItemCart() throws InterruptedException {
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://testvagrant.myshopify.com/");
+
+        HomePage homePage = new HomePage(driver);
+        homePage.addProductsToCart(2);
+
+        int cartCount = new CartPage(driver).getCartCount();
+        Assert.assertEquals(cartCount, 2);
+
+        driver.quit();
+
+    }
 //
 //    @Test(description = "LEVEL-3")
 //    public void shouldIncreaseTotalPriceOnIncreasingQuantity() {

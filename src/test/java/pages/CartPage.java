@@ -19,6 +19,9 @@ public class CartPage {
     @FindBy(how = How.CSS, using = ".icon-cart")
     WebElement cart;
 
+    @FindBy(how = How.XPATH, using = "//tr[@class='cart-item']")
+    List<WebElement> cartItem;
+    
     public CartPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
@@ -42,6 +45,8 @@ public class CartPage {
     }
 
     public int getCartCount() {
-        return 0;
+    	cart.click();
+    	return cartItem.size();
+        
     }
 }
