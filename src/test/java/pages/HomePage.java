@@ -1,8 +1,10 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
@@ -13,6 +15,8 @@ import java.util.List;
 public class HomePage {
 
     WebDriver driver;
+    Actions actions;
+    
 
     @FindBy(how = How.XPATH, using = "//h2[text()='Our mission']/parent::div//p")
     private WebElement ourMissionText;
@@ -30,6 +34,8 @@ public class HomePage {
     public HomePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+        Actions actions = new Actions(driver);
+        this.actions=actions;
     }
 
     public String getOurMissionText() {
@@ -40,17 +46,47 @@ public class HomePage {
         searchButton.click();
         searchTextBox.sendKeys(text);
     }
-
-    public void addProductsToCart(int productsCount) {
-        List<WebElement> elements = driver.findElements(By.cssSelector(".product-grid .grid__item"));
-
+    ////li[@class='grid__item'] //span[text()='Sold out']
+    public void addProductsToCart(int productsCount) throws InterruptedException {
+        
+        int j=1;
         for (int i = 0; i < productsCount; i++) {
-
-            elements.get(i).click();
-            new ProductPage(driver).addToCart();
+        	
+        	
+        	List<WebElement> elementSoldOut=driver.findElements(By.xpath("(//li[@class='grid__item'])["+j+"]//span[text()='Sold out']"));
+        	
+        	if(elementSoldOut.size()==0) {
+            
+            openLinkInNewTab(driver.findElement(By.xpath("(//li[@class='grid__item'])["+j+"]")));
+            
+        	}
+        	else i--;
+        	j++;
 
         }
+        int k=0;
+        
+        for(String window:driver.getWindowHandles())
+        {
+        	
+        	if(k>0)
+        	{
+        	driver.switchTo().window(window);
+            new ProductPage(driver).addToCart();
+        	}
+        	k++;
+        	Thread.sleep(5000);
+        }
     }
+    
+    public void openLinkInNewTab(WebElement ele) {
+    	actions.keyDown(Keys.LEFT_CONTROL)
+        .click(ele)
+        .keyUp(Keys.LEFT_CONTROL)
+        .build()
+        .perform();
+    }
+    
     @FindBy(how = How.XPATH, using = "//ul[@id='predictive-search-results-list']/li//h3")
     public List<WebElement> searchResult;
     

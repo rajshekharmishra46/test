@@ -11,7 +11,7 @@ import pages.HomePage;
 public class OrderConformationTests {
 
     @Test(description = "LEVEL-3")
-    public void shouldAssertThePaymentDetailsInOrderConfirmationPage() {
+    public void shouldAssertThePaymentDetailsInOrderConfirmationPage() throws InterruptedException {
 
         CreditCard visaCard = CreditCards.VISA_CARD;
 
