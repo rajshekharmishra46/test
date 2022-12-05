@@ -17,7 +17,7 @@ public class HomePageTests {
 
         driver.quit();
 
-        Assert.assertEquals(t, "myshopify.com");
+        Assert.assertEquals(t, "mykart");
 
     }
 
