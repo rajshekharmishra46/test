@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomePage {
@@ -50,4 +51,19 @@ public class HomePage {
 
         }
     }
+    @FindBy(how = How.XPATH, using = "//ul[@id='predictive-search-results-list']/li//h3")
+    public List<WebElement> searchResult;
+    
+    public List<String> getTextFromSearchResult() throws InterruptedException {
+    	List<String> searchResultItems = new ArrayList<String>();
+    	int i =0;
+    	
+    	
+    	while(i<searchResult.size()) {
+    		
+    		searchResultItems.add(searchResult.get(i).getText());
+    		i++;
+    }
+    	return searchResultItems;
+}
 }
